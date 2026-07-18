@@ -6,6 +6,8 @@ Packages to interface with Veddar VESC motor controllers. See https://vesc-proje
 
 This is a ROS2 implementation of the ROS1 driver using the new serial driver located in [transport drivers](https://github.com/ros-drivers/transport_drivers).
 
+tested on Ubuntu 22.04, ROS2 humble
+
 ## How to test
 
 1. Clone this repository and [transport drivers](https://github.com/ros-drivers/transport_drivers) into `src`.
