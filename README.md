@@ -77,7 +77,21 @@ ros2 topic pub /cmd_vel geometry_msgs/msg/Twist "{linear: {x: 1.0, y: 0.0, z: 0.
 ros2 topic pub /cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 1.0}}" --rate 10
 ```
 
+## ROS bag
 
+Terminal 1
+
+```
+ros2 bag record -o boat_test_01 /sensors/core /image_raw/compressed
+```
+
+after record completion, then play with
+
+```
+ros2 bag play boat_test_01
+```
+
+use rviz2 or other visualization to see the playing topics
 TODO
 
 - currently slave can_id is hardcoded to 62, change that
