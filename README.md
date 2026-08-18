@@ -111,7 +111,7 @@ TODO
 3. RC Receiver (5V PWM Output) x 1
 4. RC Transmitter (รีโมทบังคับ) x 1
 5. Logic Level Converter (Bi-directional 5V to 3.3V) x 1
-6. สาย Micro-USB (สำหรับจ่ายไฟและสื่อสารกับ PC)
+6. สาย USB-C (สำหรับจ่ายไฟและสื่อสารกับ PC)
 7. สายจั๊มเปอร์ตัวผู้-ตัวเมีย และตัวผู้-ตัวผู้
 
 ---
@@ -137,8 +137,8 @@ TODO
 > ⚠️ **ข้อควรระวัง:** ตรวจสอบขา `SWDIO` และ `SWCLK` ให้ตรงกัน ห้ามสลับขาเด็ดขาด
 
 ### 1.2 Jumper Configuration (BOOT0, BOOT1)
-*   **ในขั้นตอนการ Flash:** ไม่ต้องยุ่งกับ Jumper สีเหลือง (สามารถเสียบค้างไว้หรือถอดออกก็ได้, ไม่จำเป็น) เพราะ ST-Link จะเขียนโปรแกรมข้าม Bootloader ได้โดยตรง
-*   **หลังจาก Flash เสร็จ:** **ต้องถอด Jumper สีเหลืองออกให้หมด (ตั้ง BOOT0 = 0)** แล้วกดปุ่ม RESET บนบอร์ด 1 ครั้ง เพื่อให้บอร์ดรันโปรแกรมปกติ
+*   **ในขั้นตอนการ Flash:** set Jumper BOOT0=1, BOOT1 = 0 
+*   **หลังจาก Flash เสร็จ:**  set Jumper BOOT0=1, BOOT1 = 0 
 
 ### 1.3 Flashing Command
 เปิด Terminal และรันคำสั่งต่อไปนี้ (ในโฟลเดอร์ที่มีไฟล์ `firmware_f103c6.hex`):
@@ -155,7 +155,7 @@ Flash written and verified! jolly good!
 
 # 1.3.1 Test Installation Completed (Check via Linux)
 
-หลังจาก Flash เสร็จ ให้ถอด ST-Link ออก แล้วเสียบสาย Micro-USB เข้ากับบอร์ดและคอมพิวเตอร์ เพื่อทดสอบว่า Linux จดจำบอร์ดเป็น Joystick ได้หรือไม่:
+หลังจาก Flash เสร็จ ให้ถอด ST-Link ออก แล้วเสียบสาย USB-C เข้ากับบอร์ดและคอมพิวเตอร์ เพื่อทดสอบว่า Linux จดจำบอร์ดเป็น Joystick ได้หรือไม่:
 
 1. ตรวจสอบ Kernel Log (เพื่อดูการเชื่อมต่อ):
 
@@ -189,7 +189,7 @@ ls -l /dev/input/js*
 
 ⚠️ Crucial Rule: STM32 รับสัญญาณได้สูงสุด 3.3V แต่ RC Receiver ส่งสัญญาณออกมาที่ 5V ห้ามต่อสัญญาณโดยตรงเด็ดขาด! ต้องใช้ Logic Level Converter และต้องต่อ GND ร่วมกันทุกตัว
 
-(💡 แนะนำ: ถ่ายรูปการต่อสายจริงของคุณ แปะไว้ในส่วนนี้ เช่น ![Wiring Diagram](wiring.jpg))
+(💡 แนะนำ: ถ่ายรูปการต่อสายจริงของคุณ แปะไว้ในส่วนนี้ เช่น ![Wiring Diagram](UniversalRCJoystick.png))
 
 🔌 การต่อสายด้วย Text Diagram:
 
@@ -269,6 +269,7 @@ ros2 topic echo /cmd_vel
 
 ## 📌 Credits & License
 
-Firmware: firmware_f103c6.hex (USB HID Joystick firmware for STM32F103)
+Firmware: firmware_f103c6.hex (USB HID Joystick firmware for STM32F103) from https://github.com/Cleric-K/Universal-RC-Joystick
+
 Flashing Tool: st-link / stlink-tools
 ROS 2 Packages: joy, teleop_twist_joy
